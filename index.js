@@ -3,8 +3,10 @@ const inputEl = document.getElementById('input-el');
 const inputBtn = document.getElementById('input-btn');
 const ulEl = document.getElementById('ul-el');
 const deleteBtn = document.getElementById('delete-btn');
+const tabBtn = document.getElementById('tab-btn');
 inputBtn.addEventListener('click', handleSave);
 deleteBtn.addEventListener('click', clearLocalStorage);
+tabBtn.addEventListener('click', saveTab);
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem('myLeads'));
 
 if (leadsFromLocalStorage) {
@@ -29,6 +31,14 @@ function handleSave() {
   inputEl.value = '';
   localStorage.setItem('myLeads', JSON.stringify(myLeads));
   render(myLeads);
+}
+
+function saveTab() {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    myLeads.push(tabs[0].url);
+    localStorage.setItem('myLeads', JSON.stringify(myLeads));
+    render(myLeads);
+  });
 }
 
 function clearLocalStorage() {
