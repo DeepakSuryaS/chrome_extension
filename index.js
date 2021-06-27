@@ -9,8 +9,9 @@ function handleSave() {
   console.log("Button clicked!");
 }
 
+let listItems = '';
 for(let i = 0; i < myLeads.length; i += 1) {
-  const li = document.createElement("li");
-  li.textContent = myLeads[i];
-  ulEl.append(li);
+  listItems += "<li>" + myLeads[i] + "</li>"
 }
+
+ulEl.innerHTML = listItems;
