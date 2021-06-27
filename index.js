@@ -14,7 +14,11 @@ function handleSave() {
 function renderLeads() {
   let listItems = '';
   for(let i = 0; i < myLeads.length; i += 1) {
-    listItems += '<li>' + myLeads[i] + '</li>';
+    listItems += `<li>
+      <a href='${myLeads[i]}' target='_blank'>
+        ${myLeads[i]}
+      </a>
+    </li>`;
   }
 
   ulEl.innerHTML = listItems;
